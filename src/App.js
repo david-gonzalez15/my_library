@@ -1,10 +1,29 @@
-import "./styles.css";
+//https://www.linkedin.com/in/david-gonzalez-portfolio/
+//-----------------IMPORTS---------------
+import Home from "./_filesProyect_/Home";
 
+import { createGlobalStyle } from "styled-components";
+//---------------END_IMPORTS---------------
+
+//
+
+//------------STYLED_COMPONENTS---------------
+const GlobalStyle = createGlobalStyle`
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  `;
+//----------END_STYLED_COMPONENTS----------
+
+//
+
+//-----------------COMPONENT---------------
 export default function App() {
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
+    <>
+      <GlobalStyle />
+      <Home />
+    </>
   );
 }
+//---------------END_COMPONENT---------------
