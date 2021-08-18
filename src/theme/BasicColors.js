@@ -6,6 +6,9 @@ const BasicColors = {
   warning: "#F1C40F",
   info: "#5DADE2",
   light: "#F2F3F4",
-  dark: "#1C2833"
+  dark: "#1C2833",
+  disabled: "#ccc",
+  white: "#fff",
+  black: "#000"
 };
 export default BasicColors;

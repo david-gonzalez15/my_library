@@ -52,13 +52,8 @@ const Home = () => {
           </ul>
           <div className="examples">
             <MyBtnNeoSkew>MyBtnNeoSkew</MyBtnNeoSkew>
-            {/* <MyBtnNeuMor>MyBtnNeuMor</MyBtnNeuMor> */}
-            <MyBtnPrimary
-              type="danger"
-              rounded
-              raised
-              gradient={["#ccc", "#3498DB"]}
-            >
+            <MyBtnNeuMor>MyBtnNeuMor</MyBtnNeuMor>
+            <MyBtnPrimary rounded type="warning" raised color="">
               MyBtnPrimary
             </MyBtnPrimary>
             <MyBtnGhost>MyBtnGhost</MyBtnGhost>

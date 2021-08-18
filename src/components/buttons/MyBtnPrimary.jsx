@@ -1,102 +1,191 @@
+//size, riple effect, whitecolor darkcolor
 import styled from "styled-components";
-import { BasicColors, BasicColorsSmooth, TextColors } from "/src/theme/index";
+import {
+  BasicColors,
+  BasicColorsDark,
+  BasicColorsSmooth,
+  TextColors,
+  SizeShadow
+} from "/src/theme/index";
 const MyBtnPrimary = styled.button`
   //Static properties
-  padding: 10px;
-  margin: 10px;
-  border: none;
 
+  border: none;
   //Dynamic properties
-  background: ${({ type, background, gradient }) => {
-    if (type) {
+  cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};
+  padding: ${({ padding }) => (padding ? padding : "10px 15px")};
+  margin: ${({ margin }) => (margin ? margin : "10px")};
+  background: ${({
+    type,
+    background,
+    gradient,
+    disabled,
+    whiteColor,
+    darkColor
+  }) => {
+    if (disabled) {
+      return BasicColors.disabled;
+    } else if (background) {
+      return background;
+    } else if (gradient) {
+      if (gradient[2]) {
+        return (
+          "linear-gradient(" +
+          gradient[2] +
+          "deg," +
+          gradient[0] +
+          " 0%," +
+          gradient[1] +
+          " 100%)"
+        );
+      } else {
+        return (
+          "linear-gradient(90deg," +
+          gradient[0] +
+          " 0%," +
+          gradient[1] +
+          " 100%)"
+        );
+      }
+    } else if (type) {
       switch (type) {
         case "primary":
           return BasicColors.primary;
-          break;
         case "secondary":
           return BasicColors.secondary;
-          break;
         case "succes":
           return BasicColors.succes;
-          break;
         case "danger":
           return BasicColors.danger;
-          break;
         case "warning":
           return BasicColors.warning;
-          break;
         case "info":
           return BasicColors.info;
-          break;
         case "light":
           return BasicColors.light;
-          break;
         case "dark":
           return BasicColors.dark;
-          break;
         default:
           return BasicColors.primary;
-          break;
       }
-    } else if (gradient) {
-    } else if (background) {
-      return background;
     } else {
+      return BasicColors.primary;
     }
   }};
 
-  color: ${({ color }) => {
-    if (color) {
+  color: ${({ color, type, disabled }) => {
+    if (disabled) {
+      return TextColors.grey;
+    } else if (color) {
       return color;
     } else {
+      if (type === "light") {
+        return TextColors.dark;
+      }
       return TextColors.white;
     }
   }};
   border-radius: ${({ rounded }) => (rounded ? "200px" : "5px")};
-  box-shadow: 3px 5px 8px
-    ${({ raised, raisedColor, type }) => {
-      if (raised) {
-        return "#ccc";
+
+  box-shadow: ${({ raised, raisedColor, type, disabled }) => {
+    if (disabled) {
+    } else if (raised) {
+      return SizeShadow.basic + "#ccc";
+    } else if (raisedColor) {
+      if (raisedColor !== true) {
+        return SizeShadow.basic + raisedColor;
+      } else if (type) {
+        switch (type) {
+          case "primary":
+            return SizeShadow.basic + BasicColorsSmooth.primary;
+          case "secondary":
+            return SizeShadow.basic + BasicColorsSmooth.secondary;
+          case "succes":
+            return SizeShadow.basic + BasicColorsSmooth.succes;
+          case "danger":
+            return SizeShadow.basic + BasicColorsSmooth.danger;
+          case "warning":
+            return SizeShadow.basic + BasicColorsSmooth.warning;
+          case "info":
+            return SizeShadow.basic + BasicColorsSmooth.info;
+          case "light":
+            return SizeShadow.basic + BasicColorsSmooth.light;
+          case "dark":
+            return SizeShadow.basic + BasicColorsSmooth.dark;
+          default:
+            return SizeShadow.basic + BasicColorsSmooth.primary;
+        }
+      }
+    }
+  }};
+  transition: 0.1s;
+  :hover {
+    transition: 0.1s;
+    box-shadow: ${({ raised, raisedColor, type, disabled }) => {
+      if (disabled) {
+      } else if (raised) {
+        return SizeShadow.hoverPress + "#ccc";
       } else if (raisedColor) {
-        if (type) {
+        if (raisedColor !== true) {
+          return SizeShadow.hoverPress + raisedColor;
+        } else if (type) {
           switch (type) {
             case "primary":
-              return BasicColorsSmooth.primary;
-              break;
+              return SizeShadow.hoverPress + BasicColorsSmooth.primary;
             case "secondary":
-              return BasicColorsSmooth.secondary;
-              break;
+              return SizeShadow.hoverPress + BasicColorsSmooth.secondary;
             case "succes":
-              return BasicColorsSmooth.succes;
-              break;
+              return SizeShadow.hoverPress + BasicColorsSmooth.succes;
             case "danger":
-              return BasicColorsSmooth.danger;
-              break;
+              return SizeShadow.hoverPress + BasicColorsSmooth.danger;
             case "warning":
-              return BasicColorsSmooth.warning;
-              break;
+              return SizeShadow.hoverPress + BasicColorsSmooth.warning;
             case "info":
-              return BasicColorsSmooth.info;
-              break;
+              return SizeShadow.hoverPress + BasicColorsSmooth.info;
             case "light":
-              return BasicColorsSmooth.light;
-              break;
+              return SizeShadow.hoverPress + BasicColorsSmooth.light;
             case "dark":
-              return BasicColorsSmooth.dark;
-              break;
+              return SizeShadow.hoverPress + BasicColorsSmooth.dark;
             default:
-              return BasicColorsSmooth.primary;
-              break;
+              return SizeShadow.hoverPress + BasicColorsSmooth.primary;
           }
-        } else {
-          return raisedColor;
         }
       }
     }};
-
-  :hover {
   }
   :active {
+    transition: 0.1s;
+    box-shadow: ${({ raised, raisedColor, type, disabled }) => {
+      if (disabled) {
+      } else if (raised) {
+        return SizeShadow.null + "#ccc";
+      } else if (raisedColor) {
+        if (raisedColor !== true) {
+          return SizeShadow.null + raisedColor;
+        } else if (type) {
+          switch (type) {
+            case "primary":
+              return SizeShadow.under + BasicColorsSmooth.primary;
+            case "secondary":
+              return SizeShadow.under + BasicColorsSmooth.secondary;
+            case "succes":
+              return SizeShadow.under + BasicColorsDark.succes;
+            case "danger":
+              return SizeShadow.under + BasicColorsSmooth.danger;
+            case "warning":
+              return SizeShadow.under + BasicColorsSmooth.warning;
+            case "info":
+              return SizeShadow.under + BasicColorsSmooth.info;
+            case "light":
+              return SizeShadow.under + BasicColorsSmooth.light;
+            case "dark":
+              return SizeShadow.under + BasicColorsSmooth.dark;
+            default:
+              return SizeShadow.under + BasicColorsSmooth.primary;
+          }
+        }
+      }
+    }};
   }
 `;
 
