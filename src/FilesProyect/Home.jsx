@@ -8,7 +8,6 @@ import { AiOutlineMenu } from "react-icons/ai";
 //components
 import {
   MyBtnNeoSkew,
-  MyBtnNeuMor,
   MyBtnPrimary,
   MyBtnGhost,
   MyBtnSmooth,
@@ -17,14 +16,17 @@ import {
 //---------------END_IMPORTS---------------
 
 //------------STYLED_COMPONENTS------------
+const Wrapper = styled.div``;
 const MainTitle = styled.h1``;
 const Title = styled.h2`
   font-size: 4rem;
   font-weight: 300;
 `;
 const SubTitle = styled.h3``;
-const NewSmooth = styled(MyBtnSmooth)`
-  border-bottom: 3px solid #3498db;
+const NewBtn = styled(MyBtnPrimary)`
+  border-radius: 17px;
+  background: #e8e8e8;
+  box-shadow: 17px 17px 40px #d5d5d5, -17px -17px 40px #fbfbfb;
 `;
 //----------END_STYLED_COMPONENTS----------
 
@@ -36,7 +38,7 @@ const Home = () => {
   //-----RENDER-----
   return (
     <>
-      <div className="wrapper">
+      <Wrapper>
         <section className="section_hero">
           <MainTitle>My library</MainTitle>
           <p></p>
@@ -65,8 +67,7 @@ const Home = () => {
           <div className="examples">
             <MyBtnNeoSkew>MyBtnNeoSkew</MyBtnNeoSkew>
             {/* done */}
-            <MyBtnNeuMor>MyBtnNeuMor</MyBtnNeuMor>
-            <MyBtnPrimary raised type="succes">
+            <MyBtnPrimary size="large" fontSize="2em">
               MyBtnPrimary
             </MyBtnPrimary>
             {/* riple effect*/}
@@ -78,7 +79,7 @@ const Home = () => {
             {/* text, soft*/}
           </div>
         </section>
-      </div>
+      </Wrapper>
     </>
   );
   //---END_RENDER---
