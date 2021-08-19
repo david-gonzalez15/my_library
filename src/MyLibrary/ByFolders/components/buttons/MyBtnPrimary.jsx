@@ -1,4 +1,4 @@
-// riple effect,
+//-----------------IMPORTS---------------
 import styled from "styled-components";
 import {
   BasicColors,
@@ -8,66 +8,67 @@ import {
   SizeShadow,
   ButtonsSizes
 } from "./theme/index";
+//---------------END_IMPORTS---------------
+
+//------------STYLED_COMPONENTS---------------
 const MyBtnPrimary = styled.button`
-  //Static properties
+  /* _Static properties*/
   border: none;
 
-  //Dynamic properties
-  /* size */
-  font-size: ${({ fontSize, size }) => {
-    if (fontSize) {
-      return fontSize;
-    } else if (size) {
+  /* _Dynamic properties */
+
+  /* Customization of SIZE: small, medium and large.
+     Customization of MARGIN, PADDING and FONTSIZE */
+  ${({ padding, margin, fontSize, size }) => {
+    //---------varibles--------
+    let newPadding = ButtonsSizes.mediumPadding;
+    let newMargin = ButtonsSizes.mediumMargin;
+    let newFontSize = ButtonsSizes.mediumFont;
+
+    //----------Type---------
+    if (size) {
       switch (size) {
         case "small":
-          return ButtonsSizes.smallFont;
+          newPadding = ButtonsSizes.smallPadding;
+          newMargin = ButtonsSizes.smallMargin;
+          newFontSize = ButtonsSizes.smallFont;
+          break;
         case "medium":
-          return ButtonsSizes.mediumFont;
+          newPadding = ButtonsSizes.mediumPadding;
+          newMargin = ButtonsSizes.mediumMargin;
+          newFontSize = ButtonsSizes.mediumFont;
+          break;
         case "large":
-          return ButtonsSizes.largeFont;
+          newPadding = ButtonsSizes.largePadding;
+          newMargin = ButtonsSizes.largeMargin;
+          newFontSize = ButtonsSizes.largeFont;
+          break;
         default:
-          return ButtonsSizes.mediumFont;
+          break;
       }
-    } else {
-      return ButtonsSizes.mediumFont;
     }
-  }}};
-   padding: ${({ padding, size }) => {
-     if (padding) {
-       return padding;
-     } else if (size) {
-       switch (size) {
-         case "small":
-           return ButtonsSizes.smallPadding;
-         case "medium":
-           return ButtonsSizes.mediumPadding;
-         case "large":
-           return ButtonsSizes.largePadding;
-         default:
-           return ButtonsSizes.mediumPadding;
-       }
-     } else {
-       return ButtonsSizes.mediumPadding;
-     }
-   }};
-  margin: ${({ margin, size }) => {
-    if (margin) {
-      return margin;
-    } else if (size) {
-      switch (size) {
-        case "small":
-          return ButtonsSizes.smallMargin;
-        case "medium":
-          return ButtonsSizes.mediumMargin;
-        case "large":
-          return ButtonsSizes.largeMargin;
-        default:
-          return ButtonsSizes.mediumMargin;
-      }
-    } else {
-      return ButtonsSizes.mediumMargin;
-    }
-  }};
+
+    //---------Custome--------
+    padding && (newPadding = padding);
+    margin && (newMargin = margin);
+    fontSize && (newFontSize = fontSize);
+
+    //----------return--------
+    return (
+      "padding: " +
+      newPadding +
+      ";" +
+      "margin: " +
+      newMargin +
+      ";" +
+      "font-size: " +
+      newFontSize +
+      ";"
+    );
+  }}
+
+
+
   //other
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "")};
   width: ${({ width }) => (width ? width : "")};
@@ -182,10 +183,10 @@ const MyBtnPrimary = styled.button`
   transition: 0.1s;
   :hover {
     transition: 0.1s;
-    box-shadow: ${({ raised, raisedColor, type, disabled }) => {
+    box-shadow:${({ raised, raisedColor, type, disabled }) => {
       if (disabled) {
       } else if (raised) {
-        return SizeShadow.hoverPress + "#ccc";
+        return +"#ccc";
       } else if (raisedColor) {
         if (raisedColor !== true) {
           return SizeShadow.hoverPress + raisedColor;
@@ -249,5 +250,5 @@ const MyBtnPrimary = styled.button`
     }};
   }
 `;
-
+//----------END_STYLED_COMPONENTS----------
 export default MyBtnPrimary;
