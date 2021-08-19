@@ -1,6 +1,6 @@
 //https://www.linkedin.com/in/david-gonzalez-portfolio/
 //-----------------IMPORTS---------------
-import Home from "./_filesProyect_/Home";
+import Home from "./FilesProyect/Home";
 
 import { createGlobalStyle } from "styled-components";
 //---------------END_IMPORTS---------------

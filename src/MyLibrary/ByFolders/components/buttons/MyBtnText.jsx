@@ -1,52 +1,85 @@
-//size, riple effect, whitecolor darkcolor
+// riple effect,
 import styled from "styled-components";
 import {
   BasicColors,
   BasicColorsDark,
   BasicColorsSmooth,
   TextColors,
-  SizeShadow
-} from "/src/theme/index";
-const MyBtnPrimary = styled.button`
+  SizeShadow,
+  ButtonsSizes
+} from "./theme/index";
+const MyBtnText = styled.button`
   //Static properties
-
   border: none;
+
   //Dynamic properties
-  cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};
-  padding: ${({ padding }) => (padding ? padding : "10px 15px")};
-  margin: ${({ margin }) => (margin ? margin : "10px")};
-  background: ${({
-    type,
-    background,
-    gradient,
-    disabled,
-    whiteColor,
-    darkColor
-  }) => {
-    if (disabled) {
-      return BasicColors.disabled;
-    } else if (background) {
-      return background;
-    } else if (gradient) {
-      if (gradient[2]) {
-        return (
-          "linear-gradient(" +
-          gradient[2] +
-          "deg," +
-          gradient[0] +
-          " 0%," +
-          gradient[1] +
-          " 100%)"
-        );
-      } else {
-        return (
-          "linear-gradient(90deg," +
-          gradient[0] +
-          " 0%," +
-          gradient[1] +
-          " 100%)"
-        );
+  /* size */
+  font-size: ${({ fontSize, size }) => {
+    if (fontSize) {
+      return fontSize;
+    } else if (size) {
+      switch (size) {
+        case "small":
+          return ButtonsSizes.smallFont;
+        case "medium":
+          return ButtonsSizes.mediumFont;
+        case "large":
+          return ButtonsSizes.largeFont;
+        default:
+          return ButtonsSizes.mediumFont;
       }
+    } else {
+      return ButtonsSizes.mediumFont;
+    }
+  }}};
+   padding: ${({ padding, size }) => {
+     if (padding) {
+       return padding;
+     } else if (size) {
+       switch (size) {
+         case "small":
+           return ButtonsSizes.smallPadding;
+         case "medium":
+           return ButtonsSizes.mediumPadding;
+         case "large":
+           return ButtonsSizes.largePadding;
+         default:
+           return ButtonsSizes.mediumPadding;
+       }
+     } else {
+       return ButtonsSizes.mediumPadding;
+     }
+   }};
+  margin: ${({ margin, size }) => {
+    if (margin) {
+      return margin;
+    } else if (size) {
+      switch (size) {
+        case "small":
+          return ButtonsSizes.smallMargin;
+        case "medium":
+          return ButtonsSizes.mediumMargin;
+        case "large":
+          return ButtonsSizes.largeMargin;
+        default:
+          return ButtonsSizes.mediumMargin;
+      }
+    } else {
+      return ButtonsSizes.mediumMargin;
+    }
+  }};
+  //other
+  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "")};
+  width: ${({ width }) => (width ? width : "")};
+  cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};
+  //type
+  background: none;
+
+  color: ${({ color, type, disabled }) => {
+    if (disabled) {
+      return TextColors.grey;
+    } else if (color) {
+      return color;
     } else if (type) {
       switch (type) {
         case "primary":
@@ -72,20 +105,17 @@ const MyBtnPrimary = styled.button`
       return BasicColors.primary;
     }
   }};
-
-  color: ${({ color, type, disabled }) => {
-    if (disabled) {
-      return TextColors.grey;
-    } else if (color) {
-      return color;
-    } else {
-      if (type === "light") {
-        return TextColors.dark;
+  border-radius: ${({ rounded }) => {
+    if (rounded) {
+      if (rounded !== true) {
+        return rounded;
+      } else {
+        return "200px";
       }
-      return TextColors.white;
+    } else {
+      return "5px";
     }
   }};
-  border-radius: ${({ rounded }) => (rounded ? "200px" : "5px")};
 
   box-shadow: ${({ raised, raisedColor, type, disabled }) => {
     if (disabled) {
@@ -152,41 +182,40 @@ const MyBtnPrimary = styled.button`
         }
       }
     }};
-  }
-  :active {
-    transition: 0.1s;
-    box-shadow: ${({ raised, raisedColor, type, disabled }) => {
+    background: ${({ backgroundHover, type, disabled }) => {
       if (disabled) {
-      } else if (raised) {
-        return SizeShadow.null + "#ccc";
-      } else if (raisedColor) {
-        if (raisedColor !== true) {
-          return SizeShadow.null + raisedColor;
-        } else if (type) {
-          switch (type) {
-            case "primary":
-              return SizeShadow.under + BasicColorsSmooth.primary;
-            case "secondary":
-              return SizeShadow.under + BasicColorsSmooth.secondary;
-            case "succes":
-              return SizeShadow.under + BasicColorsDark.succes;
-            case "danger":
-              return SizeShadow.under + BasicColorsSmooth.danger;
-            case "warning":
-              return SizeShadow.under + BasicColorsSmooth.warning;
-            case "info":
-              return SizeShadow.under + BasicColorsSmooth.info;
-            case "light":
-              return SizeShadow.under + BasicColorsSmooth.light;
-            case "dark":
-              return SizeShadow.under + BasicColorsSmooth.dark;
-            default:
-              return SizeShadow.under + BasicColorsSmooth.primary;
-          }
+      } else if (backgroundHover) {
+        return backgroundHover;
+      } else if (type) {
+        switch (type) {
+          case "primary":
+            return BasicColorsSmooth.primary;
+          case "secondary":
+            return BasicColorsSmooth.secondary;
+          case "succes":
+            return BasicColorsSmooth.succes;
+          case "danger":
+            return BasicColorsSmooth.danger;
+          case "warning":
+            return BasicColorsSmooth.warning;
+          case "info":
+            return BasicColorsSmooth.info;
+          case "light":
+            return BasicColorsSmooth.light;
+          case "dark":
+            return BasicColorsSmooth.dark;
+          default:
+            return BasicColorsSmooth.primary;
         }
+      } else {
+        return BasicColorsSmooth.primary;
       }
     }};
   }
+  :active {
+    transition: 0.1s;
+    box-shadow:0px 0px 0px #ccc;
+  }
 `;
 
-export default MyBtnPrimary;
+export default MyBtnText;
