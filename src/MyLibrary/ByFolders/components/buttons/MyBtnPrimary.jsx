@@ -1,5 +1,6 @@
 //-----------------IMPORTS---------------
 import styled from "styled-components";
+//theme
 import {
   BasicColors,
   BasicColorsDark,
@@ -8,6 +9,7 @@ import {
   SizeShadow,
   ButtonsSizes
 } from "./theme/index";
+import { getButtonSize } from "./theme/StyleFunctions";
 //---------------END_IMPORTS---------------
 
 //------------STYLED_COMPONENTS---------------
@@ -15,61 +17,12 @@ const MyBtnPrimary = styled.button`
   /* _Static properties*/
   border: none;
 
-  /* _Dynamic properties */
-
-  /* Customization of SIZE: small, medium and large.
-     Customization of MARGIN, PADDING and FONTSIZE */
+  /* style functions */
   ${({ padding, margin, fontSize, size }) => {
-    //---------varibles--------
-    let newPadding = ButtonsSizes.mediumPadding;
-    let newMargin = ButtonsSizes.mediumMargin;
-    let newFontSize = ButtonsSizes.mediumFont;
-
-    //----------Type---------
-    if (size) {
-      switch (size) {
-        case "small":
-          newPadding = ButtonsSizes.smallPadding;
-          newMargin = ButtonsSizes.smallMargin;
-          newFontSize = ButtonsSizes.smallFont;
-          break;
-        case "medium":
-          newPadding = ButtonsSizes.mediumPadding;
-          newMargin = ButtonsSizes.mediumMargin;
-          newFontSize = ButtonsSizes.mediumFont;
-          break;
-        case "large":
-          newPadding = ButtonsSizes.largePadding;
-          newMargin = ButtonsSizes.largeMargin;
-          newFontSize = ButtonsSizes.largeFont;
-          break;
-        default:
-          break;
-      }
-    }
-
-    //---------Custome--------
-    padding && (newPadding = padding);
-    margin && (newMargin = margin);
-    fontSize && (newFontSize = fontSize);
-
-    //----------return--------
-    return (
-      "padding: " +
-      newPadding +
-      ";" +
-      "margin: " +
-      newMargin +
-      ";" +
-      "font-size: " +
-      newFontSize +
-      ";"
-    );
+    return getButtonSize(padding, margin, fontSize, size);
   }}
 
-
-
-  //other
+  /* _Dynamic properties */
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "")};
   width: ${({ width }) => (width ? width : "")};
   cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};

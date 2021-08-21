@@ -1,4 +1,4 @@
-// riple effect,
+//-----------------IMPORTS---------------
 import styled from "styled-components";
 import {
   BasicColors,
@@ -8,65 +8,22 @@ import {
   SizeShadow,
   ButtonsSizes
 } from "./theme/index";
-const MyBtnNeoSkew = styled.button`
-  //Static properties
+import { getButtonSize } from "./theme/StyleFunctions";
+//---------------END_IMPORTS---------------
 
+//
+
+//------------.STYLED_COMPONENT---------------
+const MyBtnNeoSkew = styled.button`
+  /* _Static properties*/
   border: none;
-  //Dynamic properties
-  font-size: ${({ fontSize, size }) => {
-    if (fontSize) {
-      return fontSize;
-    } else if (size) {
-      switch (size) {
-        case "small":
-          return ButtonsSizes.smallFont;
-        case "medium":
-          return ButtonsSizes.mediumFont;
-        case "large":
-          return ButtonsSizes.largeFont;
-        default:
-          return ButtonsSizes.mediumFont;
-      }
-    } else {
-      return ButtonsSizes.mediumFont;
-    }
-  }}};
-  padding: ${({ padding, size }) => {
-    if (padding) {
-      return padding;
-    } else if (size) {
-      switch (size) {
-        case "small":
-          return ButtonsSizes.smallPadding;
-        case "medium":
-          return ButtonsSizes.mediumPadding;
-        case "large":
-          return ButtonsSizes.largePadding;
-        default:
-          return ButtonsSizes.mediumPadding;
-      }
-    } else {
-      return ButtonsSizes.mediumPadding;
-    }
-  }};
-  margin: ${({ margin, size }) => {
-    if (margin) {
-      return margin;
-    } else if (size) {
-      switch (size) {
-        case "small":
-          return ButtonsSizes.smallMargin;
-        case "medium":
-          return ButtonsSizes.mediumMargin;
-        case "large":
-          return ButtonsSizes.largeMargin;
-        default:
-          return ButtonsSizes.mediumMargin;
-      }
-    } else {
-      return ButtonsSizes.mediumMargin;
-    }
-  }};
+  
+  /* style functions */
+  ${({ padding, margin, fontSize, size }) => {
+    return getButtonSize(padding, margin, fontSize, size);
+  }}
+
+  /* _Dynamic properties */
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "")};
   width: ${({ width }) => (width ? width : "")};
   cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};
