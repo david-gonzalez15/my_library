@@ -8,58 +8,39 @@ import {
   SizeShadow,
   ButtonsSizes
 } from "./theme/index";
-import { getButtonSize } from "./theme/StyleFunctions";
+import {
+  getButtonSize,
+  getButtonRaised,
+  getButtonColor
+} from "./theme/StyleFunctions";
 //---------------END_IMPORTS---------------
 
 //
 
 //------------.STYLED_COMPONENT---------------
 const MyBtnText = styled.button`
-  //Static properties
+  /* Static properties */
   border: none;
+  background: none;
+  transition: 0.1s;
 
   /* style functions */
   ${({ padding, margin, fontSize, size }) => {
     return getButtonSize(padding, margin, fontSize, size);
   }}
+  ${({ raised, raisedColor, type, disabled }) => {
+    if (raised || raisedColor) {
+      return getButtonRaised(raised, raisedColor, type, disabled);
+    }
+  }}
+  ${({ color, type, disabled }) => {
+    return getButtonColor(color, type, disabled);
+  }};
 
   /* _Dynamic properties */
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "")};
   width: ${({ width }) => (width ? width : "")};
   cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};
-  //type
-  background: none;
-
-  color: ${({ color, type, disabled }) => {
-    if (disabled) {
-      return TextColors.grey;
-    } else if (color) {
-      return color;
-    } else if (type) {
-      switch (type) {
-        case "primary":
-          return BasicColors.primary;
-        case "secondary":
-          return BasicColors.secondary;
-        case "succes":
-          return BasicColors.succes;
-        case "danger":
-          return BasicColors.danger;
-        case "warning":
-          return BasicColors.warning;
-        case "info":
-          return BasicColors.info;
-        case "light":
-          return BasicColors.light;
-        case "dark":
-          return BasicColors.dark;
-        default:
-          return BasicColors.primary;
-      }
-    } else {
-      return BasicColors.primary;
-    }
-  }};
   border-radius: ${({ rounded }) => {
     if (rounded) {
       if (rounded !== true) {
@@ -71,72 +52,12 @@ const MyBtnText = styled.button`
       return "5px";
     }
   }};
-
-  box-shadow: ${({ raised, raisedColor, type, disabled }) => {
-    if (disabled) {
-    } else if (raised) {
-      return SizeShadow.basic + "#ccc";
-    } else if (raisedColor) {
-      if (raisedColor !== true) {
-        return SizeShadow.basic + raisedColor;
-      } else if (type) {
-        switch (type) {
-          case "primary":
-            return SizeShadow.basic + BasicColorsSmooth.primary;
-          case "secondary":
-            return SizeShadow.basic + BasicColorsSmooth.secondary;
-          case "succes":
-            return SizeShadow.basic + BasicColorsSmooth.succes;
-          case "danger":
-            return SizeShadow.basic + BasicColorsSmooth.danger;
-          case "warning":
-            return SizeShadow.basic + BasicColorsSmooth.warning;
-          case "info":
-            return SizeShadow.basic + BasicColorsSmooth.info;
-          case "light":
-            return SizeShadow.basic + BasicColorsSmooth.light;
-          case "dark":
-            return SizeShadow.basic + BasicColorsSmooth.dark;
-          default:
-            return SizeShadow.basic + BasicColorsSmooth.primary;
-        }
-      }
-    }
-  }};
-  transition: 0.1s;
+  
   :hover {
     transition: 0.1s;
-    box-shadow: ${({ raised, raisedColor, type, disabled }) => {
-      if (disabled) {
-      } else if (raised) {
-        return SizeShadow.hoverPress + "#ccc";
-      } else if (raisedColor) {
-        if (raisedColor !== true) {
-          return SizeShadow.hoverPress + raisedColor;
-        } else if (type) {
-          switch (type) {
-            case "primary":
-              return SizeShadow.hoverPress + BasicColorsSmooth.primary;
-            case "secondary":
-              return SizeShadow.hoverPress + BasicColorsSmooth.secondary;
-            case "succes":
-              return SizeShadow.hoverPress + BasicColorsSmooth.succes;
-            case "danger":
-              return SizeShadow.hoverPress + BasicColorsSmooth.danger;
-            case "warning":
-              return SizeShadow.hoverPress + BasicColorsSmooth.warning;
-            case "info":
-              return SizeShadow.hoverPress + BasicColorsSmooth.info;
-            case "light":
-              return SizeShadow.hoverPress + BasicColorsSmooth.light;
-            case "dark":
-              return SizeShadow.hoverPress + BasicColorsSmooth.dark;
-            default:
-              return SizeShadow.hoverPress + BasicColorsSmooth.primary;
-          }
-        }
-      }
-    }};
+    ${({ raised, raisedColor, type, disabled }) => {
+      return getButtonRaised(raised, raisedColor, type, disabled, "hoverPress");
+    }}
     background: ${({ backgroundHover, type, disabled }) => {
       if (disabled) {
       } else if (backgroundHover) {

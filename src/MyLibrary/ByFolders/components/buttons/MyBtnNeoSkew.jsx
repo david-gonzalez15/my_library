@@ -104,93 +104,100 @@ const MyBtnNeoSkew = styled.button`
   }};
 
   box-shadow: ${({ type, disabled, skewShadow }) => {
+    let color = BasicColorsDark;
+    let size = SizeShadow.basicSkew;
+
     if (disabled) {
     } else if (skewShadow) {
-      return SizeShadow.basicSkew + skewShadow;
+      return size + skewShadow;
     } else if (type) {
       switch (type) {
         case "primary":
-          return SizeShadow.basicSkew + BasicColorsDark.primary;
+          return size + color.primary;
         case "secondary":
-          return SizeShadow.basicSkew + BasicColorsDark.secondary;
+          return size + color.secondary;
         case "succes":
-          return SizeShadow.basicSkew + BasicColorsDark.succes;
+          return size + color.succes;
         case "danger":
-          return SizeShadow.basicSkew + BasicColorsDark.danger;
+          return size + color.danger;
         case "warning":
-          return SizeShadow.basicSkew + BasicColorsDark.warning;
+          return size + color.warning;
         case "info":
-          return SizeShadow.basicSkew + BasicColorsDark.info;
+          return size + color.info;
         case "light":
-          return SizeShadow.basicSkew + BasicColorsDark.light;
+          return size + color.light;
         case "dark":
-          return SizeShadow.basicSkew + BasicColorsDark.dark;
+          return size + color.dark;
         default:
-          return SizeShadow.basicSkew + BasicColorsDark.primary;
+          return size + color.primary;
       }
     } else {
-      return SizeShadow.basicSkew + BasicColorsDark.primary;
+      return size + color.primary;
     }
   }};
   transition: 0.1s;
   :hover {
     transition: 0.1s;
     box-shadow: ${({ type, disabled, skewShadow }) => {
+      let color = BasicColorsDark;
+      let size = SizeShadow.hoverPressSkew;
       if (disabled) {
       } else if (skewShadow) {
-        return SizeShadow.hoverPressSkew + skewShadow;
+        return size + skewShadow;
       } else if (type) {
         switch (type) {
           case "primary":
-            return SizeShadow.hoverPressSkew + BasicColorsDark.primary;
+            return size + color.primary;
           case "secondary":
-            return SizeShadow.hoverPressSkew + BasicColorsDark.secondary;
+            return size + color.secondary;
           case "succes":
-            return SizeShadow.hoverPressSkew + BasicColorsDark.succes;
+            return size + color.succes;
           case "danger":
-            return SizeShadow.hoverPressSkew + BasicColorsDark.danger;
+            return size + color.danger;
           case "warning":
-            return SizeShadow.hoverPressSkew + BasicColorsDark.warning;
+            return size + color.warning;
           case "info":
-            return SizeShadow.hoverPressSkew + BasicColorsDark.info;
+            return size + color.info;
           case "light":
-            return SizeShadow.hoverPressSkew + BasicColorsDark.light;
+            return size + color.light;
           case "dark":
-            return SizeShadow.hoverPressSkew + BasicColorsDark.dark;
+            return size + color.dark;
           default:
-            return SizeShadow.hoverPressSkew + BasicColorsDark.primary;
+            return size + color.primary;
         }
       } else {
-        return SizeShadow.hoverPressSkew + BasicColorsDark.primary;
+        return size + color.primary;
       }
     }};
   }
   :active {
     transition: 0.1s;
     box-shadow: ${({ type, disabled, skewShadow }) => {
+      let color = BasicColorsDark;
+      let size = SizeShadow.underSkew;
       if (disabled) {
       } else if (skewShadow) {
         return SizeShadow.underSkew + skewShadow;
       } else if (type) {
         switch (type) {
           case "primary":
-            return SizeShadow.underSkew + BasicColorsDark.primary;
+            return size + color.primary;
           case "secondary":
-            return SizeShadow.underSkew + BasicColorsDark.secondary;
+            return size + color.secondary;
           case "succes":
-            return SizeShadow.underSkew + BasicColorsDark.succes;
+            return size + color.succes;
           case "danger":
-            return SizeShadow.underSkew + BasicColorsDark.danger;
+            return size + color.danger;
           case "warning":
-            return SizeShadow.underSkew + BasicColorsDark.warning;
+            return size + color.warning;
           case "info":
-            return SizeShadow.underSkew + BasicColorsDark.info;
+            return size + color.info;
           case "light":
-            return SizeShadow.underSkew + BasicColorsDark.light;
+            return size + color.light;
           case "dark":
-            return SizeShadow.underSkew + BasicColorsDark.dark;
+            return size + color.dark;
           default:
-            return SizeShadow.underSkew + BasicColorsDark.primary;
+            return size + color.primary;
         }
       } else {
         return SizeShadow.underSkew + BasicColorsDark.primary;

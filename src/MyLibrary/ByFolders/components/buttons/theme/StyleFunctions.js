@@ -1,5 +1,12 @@
 //-----------------IMPORTS---------------
-import { ButtonsSizes } from "./index";
+import {
+  ButtonsSizes,
+  BasicColorsSmooth,
+  BasicColorsDark,
+  BasicColors,
+  TextColors,
+  SizeShadow
+} from "./index";
 //---------------END_IMPORTS---------------
 
 //
@@ -14,7 +21,7 @@ const getButtonSize = (padding, margin, fontSize, size) => {
   let newMargin = ButtonsSizes.mediumMargin;
   let newFontSize = ButtonsSizes.mediumFont;
 
-  //----------Type---------
+  //----------Size---------
   if (size) {
     switch (size) {
       case "small":
@@ -55,4 +62,64 @@ const getButtonSize = (padding, margin, fontSize, size) => {
     ";"
   );
 };
-export { getButtonSize };
+
+//----------------------------------------------
+const getButtonRaised = (
+  raised = false,
+  raisedColor = false,
+  type = false,
+  disabled = false,
+  state = "active"
+) => {
+  //--------Config------
+  let color = BasicColorsSmooth;
+  let size;
+
+  state === "active" && (size = SizeShadow.active);
+  state === "hoverPress" && (size = SizeShadow.hoverPress);
+  state === "hoverOver" && (size = SizeShadow.hoverOver);
+  state === "under" && (size = SizeShadow.under);
+
+  //---------default--------
+  let newBoxShadow = "";
+
+  //---------raised---------
+  raised && (newBoxShadow = size + "#ccc");
+
+  //---------raisedColor--------
+  if (raisedColor) {
+    type === "primary" && (newBoxShadow = size + color.primary);
+    type === "secondary" && (newBoxShadow = size + color.secondary);
+    type === "succes" && (newBoxShadow = size + color.succes);
+    type === "danger" && (newBoxShadow = size + color.danger);
+    type === "light" && (newBoxShadow = size + color.light);
+    type === "dark" && (newBoxShadow = size + color.dark);
+
+    raisedColor !== true && (newBoxShadow = size + raisedColor);
+  }
+  //--------disabled------
+  disabled && (newBoxShadow = "");
+  //---------return------
+  return "box-shadow: " + newBoxShadow + ";";
+};
+
+const getButtonColor = (color, type, disabled) => {
+  let colors = BasicColors;
+  let newColor = colors.primary;
+
+  if (type) {
+    type === "primary" && (newColor = colors.primary);
+    type === "secondary" && (newColor = colors.secondary);
+    type === "succes" && (newColor = colors.succes);
+    type === "danger" && (newColor = colors.danger);
+    type === "light" && (newColor = colors.light);
+    type === "dark" && (newColor = colors.dark);
+  }
+  //-------custom------
+  color && (newColor = color);
+  //------disabled------
+  disabled && (newColor = TextColors.grey);
+
+  return "color: " + newColor + ";";
+};
+export { getButtonSize, getButtonRaised, getButtonColor };

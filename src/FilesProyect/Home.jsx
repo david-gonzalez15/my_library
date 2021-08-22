@@ -67,14 +67,12 @@ const Home = () => {
           <div className="examples">
             <MyBtnNeoSkew>MyBtnNeoSkew</MyBtnNeoSkew>
             {/* done */}
-            <MyBtnPrimary size="large" fontSize="2em">
-              MyBtnPrimary
-            </MyBtnPrimary>
+            <MyBtnPrimary rounded="10px 0px">MyBtnPrimary</MyBtnPrimary>
             {/* riple effect*/}
             <MyBtnGhost type="succes" rounded>
               MyBtnGhost
             </MyBtnGhost>
-            <MyBtnSmooth type="warning">INFO</MyBtnSmooth> {/* riple effect*/}
+            <MyBtnSmooth type="danger">INFO</MyBtnSmooth> {/* riple effect*/}
             <MyBtnText type="">MyBtnText</MyBtnText>
             {/* text, soft*/}
           </div>
